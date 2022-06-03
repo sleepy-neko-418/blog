@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - "./infra/k8s/*"
+build:
+  local:
+    push: false
+  artifacts:
+    - image: tungastreek/mu-blog-client
+      context: "./client"
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.js"
+    - image: tungastreek/mu-blog-posts
+      context: "./posts"
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+    - image: tungastreek/mu-blog-comments
+      context: "./comments"
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+    - image: tungastreek/mu-blog-query
+      context: "./query"
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+    - image: tungastreek/mu-blog-moderation
+      context: "./moderation"
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+    - image: tungastreek/mu-blog-event-bus
+      context: "./event-bus"
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
