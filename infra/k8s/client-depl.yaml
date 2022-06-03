@@ -16,7 +16,7 @@ spec:
           image: tungastreek/mu-blog-client
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
 ---
 apiVersion: v1
